@@ -1,0 +1,172 @@
+---
+#Fichier de configuration
+
+# Classes d'interface à instancier
+extract_authorized_class: []
+load_authorized_class: []
+transform_authorized_class: []
+notif_authorized_class: []
+observability:
+  Database:
+    database: "Monitoring"
+    user: "root"
+    password: "mysql"
+    host_GCP: "104.199.85.251"
+    host_local: "localhost"
+    host: "localhost"
+    port: 3306
+
+Mesh:
+
+  Treasury:
+    users: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Users_roles"
+    cloud:
+      azure:
+        TENANT_ID: "1cfbb4dd-d95d-49a3-a4d2-7768d47d8e44"
+        CLIENT_ID: "986d0cf0-8fe0-480f-8c5c-fced511b6e5e"
+        CLIENT_SECRET: "VLi8Q~xXJqjn.yfeY7qLEh8jaNHHGETnfog2_as3"
+        STORAGE_ACCOUNT_NAME: "adlsvdl"
+
+    classes:
+      data_class: "OnPremStorage"
+      data_params: ''
+      db_manager_class: "MysqlDB"
+      db_manager_params: ''
+      transformer_class: "MysqlTransformator"
+      transformer_params: ''
+    #Paramètres de chargement
+    loading_config:
+      load_type: "scratch"
+      files_type: ".csv"
+      loading_mode: "append"
+      dataframe: "pandas"
+
+    #Configuraion de la base de données
+    Database:
+      database: "treasury_bronze"
+      user: "root"
+      password: "mysql"
+      host_GCP: "104.199.85.251"
+      host_local: "localhost"
+      host: "localhost"
+      port: 3306
+
+    # Paths vers les scripts base de données
+    scripts_location:
+      sql_files_init: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/SQL_Scripts/DWH_Structure_Init"
+      sql_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/SQL_Scripts"
+      sql_files_tables_creation: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/SQL_Scripts/DWH_Tables_creation"
+      sql_common_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/SQL_Scripts/Commons"
+
+    # Paths les repertoires de stockages des données brutes
+    raw_data_location:
+      input_repo: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/Extracts"
+      input_repo_commons: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/Extracts/Commons"
+      input_repo_financials_rate: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/Extracts/Rates"
+      input_repo_incremental: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/Extracts/Incremental"
+      input_repo_updates: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Treasury/Extracts/Updates"
+      output_repo: "y"
+
+  Comptabilite:
+    users: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Users_roles"
+
+    cloud:
+      azure:
+        TENANT_ID: "1cfbb4dd-d95d-49a3-a4d2-7768d47d8e44"
+        CLIENT_ID: "986d0cf0-8fe0-480f-8c5c-fced511b6e5e"
+        CLIENT_SECRET: "VLi8Q~xXJqjn.yfeY7qLEh8jaNHHGETnfog2_as3"
+        STORAGE_ACCOUNT_NAME: "adlsvdl"
+
+
+    loading_config:
+      load_type: "scratch"
+      files_type: ".csv"
+      loading_mode: "append"
+      dataframe: "pandas"
+
+    classes:
+      data_class: "OnPremStorage"
+      data_params: ''
+      db_manager_class: "MysqlDB"
+      db_manager_params: ''
+      transformer_class: "MysqlTransformator"
+      transformer_params: ''
+
+    #Configuraion de la base de données
+    Database:
+      database: "comptabilite_bronze"
+      user: "root"
+      password: "mysql"
+      host_GCP: "104.199.85.251"
+      host_local: "localhost"
+      host: "localhost"
+      port: 3306
+
+    # Paths vers les scripts base de données
+    scripts_location:
+      sql_files_init: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/SQL_Scripts/DWH_Structure_Init"
+      sql_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/SQL_Scripts"
+      sql_files_tables_creation: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/SQL_Scripts/DWH_Tables_creation"
+      sql_common_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/SQL_Scripts/Commons"
+
+    # Paths les repertoires de stockages des données brutes
+    raw_data_location:
+      separator: ";"
+      input_repo: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Extracts"
+      input_repo_commons: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Extracts/Commons"
+      input_repo_financials_rate: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Extracts/Rates"
+      input_repo_incremental: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Extracts/Incremental"
+      input_repo_updates: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Extracts/Updates"
+      output_repo: "y"
+
+  Commons:
+    users: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Comptabilite/Users_roles"
+
+    cloud:
+      azure:
+        TENANT_ID: "1cfbb4dd-d95d-49a3-a4d2-7768d47d8e44"
+        CLIENT_ID: "986d0cf0-8fe0-480f-8c5c-fced511b6e5e"
+        CLIENT_SECRET: "VLi8Q~xXJqjn.yfeY7qLEh8jaNHHGETnfog2_as3"
+        STORAGE_ACCOUNT_NAME: "adlsvdl"
+
+
+    classes:
+      data_class: "OnPremStorage"
+      data_params: ''
+      db_manager_class: "MysqlDB"
+      db_manager_params: ''
+      transformer_class: "MysqlTransformator"
+      transformer_params: ''
+    #Paramètres de chargement
+    loading_config:
+      load_type: "scratch"
+      files_type: ".csv"
+      loading_mode: "append"
+      dataframe: "pandas"
+
+
+    #Configuraion de la base de données
+    Database:
+      database: "commons_bronze"
+      user: "root"
+      password: "mysql"
+      host_GCP: "104.199.85.251"
+      host_local: "localhost"
+      host: "localhost"
+      port: 3306
+
+    # Paths vers les scripts base de données
+    scripts_location:
+      sql_files_init: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/SQL_Scripts/DWH_Structure_Init"
+      sql_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/SQL_Scripts"
+      sql_files_tables_creation: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/SQL_Scripts/DWH_Tables_creation"
+      sql_common_files: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/SQL_Scripts/Commons"
+
+    # Paths les repertoires de stockages des données brutes
+    raw_data_location:
+      input_repo: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/Extracts"
+      input_repo_commons: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/Extracts/Commons"
+      input_repo_financials_rate: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/Extracts/Rates"
+      input_repo_incremental: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/Extracts/Incremental"
+      input_repo_updates: "C:/Users/tallar/Documents/PROJETS/Reporting/Meshs/Commons/Extracts/Updates"
+      output_repo: "y"
