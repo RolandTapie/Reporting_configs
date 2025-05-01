@@ -1,0 +1,19 @@
+### A basic comparison of tools (by order of preference) and functions used for data transformation
+
+| Task                | Difficulty | 1️⃣ SQL 🐘                     | 2️⃣ DuckDB  🐍+🦆              | 3️⃣ Pandas 🐍+🐼          | 4️⃣ DBT 📦                    | 5️⃣ VBA 🔧                    | 5️⃣ Excel 📊                |
+|---------------------|------------|------------------------------|--------------------------------|------------------------------|-------------------------------|------------------------------|---------------------------|
+| Count_rows          | 🟢         | `COUNT(*)`                  | `COUNT(*)`                     | `len(df)`                    | `COUNT(*)`                    | `CountA`                  | `=COUNTA(...)`           |
+| Export_data         | 🟢         | `INTO OUTFILE`              | `COPY TO 'dataset.csv'`        | `to_csv()`                   | `materialize view` or `table` | `SaveAs()`                | File > Save As           |
+| Filter_rows         | 🟡         | `WHERE column > 100`        | `WHERE column > 100`           | `df[df['column'] > 100]`     | `WHERE column > 100`          | `AutoFilter`               | `=FILTER(...)`           |
+| Group_By            | 🔴         | `GROUP BY` + `COUNT(*)`     | `GROUP BY` + `COUNT(*)`        | `groupby().agg()`            | `GROUP BY`                    | `PivotTable`              | Pivot Table              |
+| Handle_Missing_Data | 🟡         | `COALESCE(...)`             | `COALESCE(...)`                | `fillna()` or `dropna()`     | `COALESCE(...)`               | `If IsEmpty`              | `=IF(ISBLANK(...),...)`  |
+| Join_Tables         | 🔴         | `JOIN ... ON ...`           | `JOIN ... ON ...`              | `merge(...)`                 | `JOIN ...`                    | `VLOOKUP`                 | `VLOOKUP` / `XLOOKUP`    |
+| Load_Data           | 🟡         | `SELECT * FROM table;`      | `SELECT * FROM 'dataset.csv';` | `pd.read_csv("dataset.csv")` | `ref(...)`                    | `Workbooks.Open`           | File > Open              |
+| Mean_or_AVG         | 🟢         | `AVG(col)`                  | `AVG(col)`                     | `df['col'].mean()`           | `AVG(col)`                    | `Average()`               | `=AVERAGE(...)`          |
+| Add_new_Column      | 🟡         | `col * 0.5 AS tax`        | `col * 0.5 AS tax`             | `df['tax'] = ...`            | `*, col * 0.5 AS tax`         | `For Each`                | `=B2*0.5`                |
+| Remove_duplicates   | 🟡         | `DISTINCT`                  | `DISTINCT`                     | `drop_duplicates()`          | `DISTINCT`                    | `RemoveDuplicates`        | Remove Duplicates        |
+| Rename_Column       | 🟡         | `AS new_column_name`               | `AS new_column_name`           | `rename(...)`                | `AS new_column_name`          | `Headers`                 | Manual Rename            |
+| Select_Columns      | 🟢         | `SELECT col_A, col_B`         | `SELECT col_A, col_B`          | `df[['col_A','col_B']]`      | `SELECT col_A, col_B`         | `Range("A:B")`             | Columns A, B             |
+| Sort_data           | 🟡         | `ORDER BY col DESC`         | `ORDER BY col DESC`            | `df.sort_values(...)`        | `ORDER BY col DESC`           | `Range.Sort`               | Data > Sort              |
+| SUM                 | 🟢         | `SUM(col)`                  | `SUM(col)`                     | `df['col'].sum()`            | `SUM(col)`                    | `Sum()`                   | `=SUM(...)`              |
+| Visualization       | 🟡         | ❌                           | ❌                              | `plot()`, `seaborn`, etc.`   | ❌                             | `ChartObjects.Add()`      | Insert > Chart           |
